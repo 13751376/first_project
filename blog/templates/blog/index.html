@@ -1,0 +1,60 @@
+
+{% extends 'blog/base.html' %}
+{% block title %} |{{article.title}} {% endblock %}
+{% block main %}
+      <!-- Page Header-->
+         <p>Hi </p>
+         <div>
+             <ul>
+                 <li>
+                     <a href="#"></a>
+                 </li>
+             </ul>
+         </div>
+        <header class="masthead" style="background-image: url('static/blog/img/home-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1 style="color:red;font-size:26;">جنگویی</h1>
+                            <span class="subheading"style="color:black;font-weight:bold;font-size:30px;">زمانی برای آرامش </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!-- Post preview-->
+                 {% for articles in article %}
+                    <div class="post-preview">
+                        <a href="{% url 'blog:page' articles.slug  %}">
+                            <h2 class="post-title">{{articles.time}}</h2>
+                            <h3 class="post-subtitle">{{articles.description | truncatewords:10}}</h3>
+                        </a>
+                        <p class="post-meta">
+                            محمدرضا نوشته
+                            <a href="#!">{{articles.jalali_publish}}</a>
+
+                        </p>
+                        <div>
+                          {% for cat in articles.category.all %}
+                            <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
+                          {% endfor %}
+                        </div>
+
+                    </div>
+                 {%endfor %}
+                    <!-- Pager-->
+                    <div class="d-flex justify-content-end mb-4">
+                       {% if article.has_previous %}
+
+                          <a class="btn btn-primary text-uppercase" href="#!">پست های قدیمی </a>
+                       {%endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+{% block title %} |{{article.title}} {% endblock %}
+{% block main %}
+      <!-- Page Header-->
+        <header class="masthead" style="background-image: url('static/blog/img/home-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                         <h3> {{article.title}}  </h3>
+                        <div class="site-heading">
+                            <h1 style="color:red;font-size:26;">وبلاگ من </h1>
+                            <span class="subheading"style="color:black;font-weight:bold;font-size:30px;">زمانی برای آرامش </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!-- Post preview-->
+                 {% for articles in category.article.published %}
+                    <div class="post-preview">
+                        <a href="{% url 'blog:page' articles.slug  %}">
+                            <h2 class="post-title">{{articles.title}}</h2>
+                            <h3 class="post-subtitle">{{articles.description | truncatewords:10}}</h3>
+                        </a>
+                        <p class="post-meta">
+                            نوشته شده توسط
+                            <a href="#!">{{articles.jalali_publish}}</a>
+
+                        </p>
+                        <div>
+                          {% for cat in articles.category.all %}
+                            <a href="#">#{{cat.title}}</a>
+                          {% endfor %}
+                        </div>
+
+                    </div>
+                 {%endfor %}
+                    <!-- Pager-->
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
